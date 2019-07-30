@@ -2,4 +2,4 @@
 
 trapIt () { "$@"& pid="$!"; trap "kill -INT $pid" INT TERM; while kill -0 $pid > /dev/null 2>&1; do wait $pid; ec="$?"; done; exit $ec;};
 
-trapIt /ppm/vendor/bin/ppm start --ansi $@
+trapIt /ppm/vendor/bin/ppm start --ansi --config=/ppm/ppm.json --port=$PORT $@
