@@ -6,7 +6,8 @@ ENV COMPOSER_MEMORY_LIMIT -1
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
-RUN apt-get update \
- && apt-get install -y git libzip-dev unzip zlib1g-dev \
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
+ && apt-get install -y git libzip-dev nodejs unzip zlib1g-dev \
  && apt-get clean \
- && docker-php-ext-install -j$(nproc) zip
+ && docker-php-ext-install -j$(nproc) zip \
+ && npm install -g --allow-root --unsafe-perm=true dredd
