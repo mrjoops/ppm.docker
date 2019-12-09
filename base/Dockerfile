@@ -1,7 +1,7 @@
-FROM php:7.3.9-cli
+FROM php:7.4.0-cli
 
-ARG ppm_http_version=^2.0
-ARG ppm_version=^2.0.1
+ARG ppm_http_version=^2.0.2
+ARG ppm_version=^2.0.2
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HTACCESS_PROTECT 0
@@ -16,7 +16,7 @@ RUN apt-get update \
  && docker-php-ext-install -j$(nproc) zip \
  && composer require -on --prefer-dist --sort-packages php-pm/php-pm:${ppm_version} php-pm/httpkernel-adapter:${ppm_http_version}
 
-FROM php:7.3.9-cli
+FROM php:7.4.0-cli
 
 ENV PORT 80
 
