@@ -9,5 +9,4 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN apt-get update \
  && apt-get install -y git libzip-dev nodejs npm unzip zlib1g-dev \
  && apt-get clean \
- && docker-php-ext-install -j$(nproc) zip \
- && npm install -g --allow-root --unsafe-perm=true dredd
+ && docker-php-ext-install -j$(nproc) zip
