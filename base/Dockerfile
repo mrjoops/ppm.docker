@@ -1,7 +1,7 @@
-FROM php:7.4.8-cli
+FROM php:7.4.16-cli
 
 ARG ppm_http_version=^2.0.6
-ARG ppm_version=^2.0.4
+ARG ppm_version=^2.2.1
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_HTACCESS_PROTECT 0
@@ -13,10 +13,10 @@ WORKDIR /ppm
 
 RUN apt-get update \
  && apt-get install -y git libzip-dev unzip zlib1g-dev \
- && docker-php-ext-install -j$(nproc) zip \
+ && docker-php-ext-install -j$(nproc) pcntl zip \
  && composer require -on --prefer-dist --sort-packages php-pm/php-pm:${ppm_version} php-pm/httpkernel-adapter:${ppm_http_version}
 
-FROM php:7.4.8-cli
+FROM php:7.4.16-cli
 
 ENV PORT 80
 
