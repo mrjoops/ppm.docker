@@ -22,7 +22,7 @@ ENV PORT 80
 
 COPY --from=0 /ppm /ppm
 COPY php.ini /usr/local/etc/php/conf.d/config.ini
-COPY run.sh /etc/app/run.sh
+COPY run.sh /run.sh
 
 RUN docker-php-ext-install -j$(nproc) pcntl \
  && cp $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini \
@@ -32,6 +32,4 @@ WORKDIR /app
 
 EXPOSE $PORT
 
-ENTRYPOINT [ "/etc/app/run.sh" ]
-
-CMD [ "/app" ]
+CMD [ "/run.sh", "/app" ]
